@@ -277,10 +277,18 @@ var googleHelper = (function() {
 
   var BASE_API_PATH = 'plus/v1/';
   var userid;
+  var accessToken;
 
   var auth;
 
   return {
+    AccessToken:function ()    
+    {
+      console.log("accessToken" + accessToken);
+      return accessToken;
+    }
+    ,
+
     UserId:function()
     {
       console.log("userid" + userid);
@@ -292,7 +300,7 @@ var googleHelper = (function() {
       request.execute( function(profile) {
         console.log(profile);
         console.log(profile.id);
-        userid=profile.id;
+        userid=profile.id;        
         var r={success:true,socialChannel:"Google",response:profile};
         callback(r );
       });
@@ -311,6 +319,7 @@ var googleHelper = (function() {
     Init:function(authResult,Initcallback)
     {
       auth=authResult;
+      accessToken=authResult.access_token;
       gapi.client.load('plus','v1', function(){
         if (authResult['access_token']) {
           Initcallback({success:true});

@@ -50,7 +50,10 @@
   $scope.test = function() {
   
     var uid=googleHelper.UserId();
-    var url='https://www.googleapis.com/books/v1/user/'+uid+'/bookshelves/';
+    var ak=googleHelper.AccessToken();
+    
+    var url='https://www.googleapis.com/books/v1/mylibrary/bookshelves?access_token='+ ak;
+    https://content.googleapis.com/books/v1/mylibrary/bookshelves?key=AIzaSyCFj15TpkchL4OUhLD1Q2zgxQnMb7v3XaM
 
     $http({method: 'GET', url: url}).
 		success(function(data, status, headers, config) {
